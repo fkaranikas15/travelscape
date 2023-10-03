@@ -8,14 +8,6 @@ import { CheckoutProvider } from "./context/CheckoutContext";
 import { Suspense, lazy } from "react";
 import Spinner from "./ui/Spinner";
 
-// import Home from "./pages/Home";
-// import AboutPage from "./pages/AboutPage";
-// import SchedulePage from "./pages/SchedulePage";
-// import BlogPage from "./pages/BlogPage";
-// import ToursPage from "./pages/ToursPage";
-// import DestinationsPage from "./pages/DestinationsPage";
-// import ContactPage from "./pages/ContactPage";
-// import CheckoutPage from "./pages/CheckoutPage";
 const Home = lazy(() => import("./pages/Home"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const SchedulePage = lazy(() => import("./pages/SchedulePage"));

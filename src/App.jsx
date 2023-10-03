@@ -1,18 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
-import Home from "./pages/Home";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
-import DestinationsPage from "./pages/DestinationsPage";
-import AboutPage from "./pages/AboutPage";
-import ToursPage from "./pages/ToursPage";
-import SchedulePage from "./pages/SchedulePage";
-import BlogPage from "./pages/BlogPage";
-import ContactPage from "./pages/ContactPage";
 import ScrollToTop from "./utils/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import { CheckoutProvider } from "./context/CheckoutContext";
-import CheckoutPage from "./pages/CheckoutPage";
+import { Suspense, lazy } from "react";
+import Spinner from "./ui/Spinner";
+
+// import Home from "./pages/Home";
+// import AboutPage from "./pages/AboutPage";
+// import SchedulePage from "./pages/SchedulePage";
+// import BlogPage from "./pages/BlogPage";
+// import ToursPage from "./pages/ToursPage";
+// import DestinationsPage from "./pages/DestinationsPage";
+// import ContactPage from "./pages/ContactPage";
+// import CheckoutPage from "./pages/CheckoutPage";
+const Home = lazy(() => import("./pages/Home"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const SchedulePage = lazy(() => import("./pages/SchedulePage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const ToursPage = lazy(() => import("./pages/ToursPage"));
+const DestinationsPage = lazy(() => import("./pages/DestinationsPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 
 function App() {
   return (
@@ -20,16 +31,18 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/schedule" element={<SchedulePage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/tours" element={<ToursPage />} />
-          <Route path="/destinations" element={<DestinationsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-        </Routes>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/tours" element={<ToursPage />} />
+            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+          </Routes>
+        </Suspense>
         <Footer />
         <ScrollToTop />
         <Toaster
